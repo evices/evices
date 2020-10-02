@@ -6,6 +6,9 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 
+const router = require('./router/api-v1');
+const auth_router = require('./router/auth-route');
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // requiring the error middleware files
 const notFoundhandler = require('./error_Middleware/404error');
@@ -21,6 +24,10 @@ app.use(cors());
 //
 app.use(morgan('dev'));
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+app.use(auth_router);
+app.use(router);
+
 // using the error middleware handlers
 app.get('*', notFoundhandler);
 app.get(internalServerError);
