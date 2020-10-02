@@ -101,7 +101,7 @@ class User extends Model {
 
         let user = await this.read(query);
         user = user[0];
-        
+
         if (!user) {
             return null;
         }

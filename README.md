@@ -46,3 +46,10 @@ The main feature of this website clients can contact the service providers, the 
 $ node .
 $ node index.js
 ```
+
+## .env file
+```
+PORT=3000
+MONGOOSE_URL=mongodb://localhost:27017/401midproject
+SECRET=evices
+```

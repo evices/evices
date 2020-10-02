@@ -18,6 +18,9 @@ module.exports = (req, res, next) => {
     case 'signin':
       next();
       return;
+    case 'signup':
+      next();
+      return;
     default:
       next('Invalid Model');
       return;

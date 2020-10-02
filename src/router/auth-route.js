@@ -5,7 +5,7 @@ const auth = require('../middleware/authorization');
 
 router.post('/signup', async (req, res, next) => {
     try {
-        user.create(req.body).then(result => {
+        user.save(req.body).then(result => {
             let token = user.generateToken(result);
             res.body = {
                 result,
