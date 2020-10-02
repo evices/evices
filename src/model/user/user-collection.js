@@ -122,6 +122,24 @@ class User extends Model {
             return Promise.reject();
         }
     }
+    async patch (_id, record){
+        try {
+            // console.log(_id, record);
+            let result = await this.read({
+                username: record.username,
+            });
+                console.log(result.length);
+                if (result.length === 0) {
+                    
+                } else {
+                    
+                }
+        } catch (err) {
+            return err;
+        }
+
+    }
+
 }
 
 module.exports = new User();
