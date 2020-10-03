@@ -6,12 +6,15 @@ const getModel = require('../middleware/params');
 const router = express.Router();
 router.param('model', getModel);
 
-router.post('/:model', postHandler);
+const bearer = require('../middleware/bearer-auth');
+const permissions = require('../middleware/auth-capabilities');
+
+router.post('/:model',  bearer, permissions('create'), postHandler);
 router.get('/:model', getHandler);
 router.get('/:model/:id', getHandlerById);
-router.put('/:model/:id', updateHandler);
-router.patch('/:model/:id', patchHandler);
-router.delete('/:model/:id', deleteHandler);
+router.put('/:model/:id',  bearer, permissions('update'), updateHandler);
+router.patch('/:model/:id',  bearer, permissions('update'), patchHandler);
+router.delete('/:model/:id', bearer, permissions('delete'), deleteHandler);
 
 
 function postHandler(req, res, next) {
