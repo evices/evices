@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const user = require('../model/user/user-collection');
 const auth = require('../middleware/authorization');
+const oauth = require('../middleware/oauth');
 
 router.post('/signup', async (req, res, next) => {
     try {
@@ -23,6 +24,34 @@ router.post('/signup', async (req, res, next) => {
 
 router.post('/signin', auth, (req, res, next) => {
     res.cookie('auth', req.token);
+    res.status(200).json({
+        token: req.token,
+        user: req.user
+    });
+});
+
+router.get('/google', (req, res) => {
+    let URL = 'https://accounts.google.com/o/oauth2/v2/auth';
+
+    let options = {
+        response_type: 'code',
+        client_id: '82394101385-jaqm9i6p3cdu3i374lgg1b9ao6gfnpe3.apps.googleusercontent.com',
+        redirect_uri: 'http://localhost:3000/oauth',
+        scope: 'openid email',
+        state: 'http://localhost',
+        access_type: 'offline',
+    }
+
+    let QueryString = Object.keys(options).map((key) => {
+        return `${key}=` + encodeURIComponent(options[key]);
+    }).join("&");
+
+    let authURL = `${URL}?${QueryString}`;
+
+    res.send(`<a href=${authURL}>Login</a>`);
+});
+
+router.get('/oauth', oauth, async (req, res) => {
     res.status(200).json({
         token: req.token,
         user: req.user
