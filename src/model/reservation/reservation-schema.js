@@ -22,7 +22,8 @@ const reservation = mongoose.Schema({
     is_approved: {
         type: Number,
         enum: [0, 1, 2],
-        require: true
+        require: true,
+        default: 0
         //(0 = pending, 1 = approved, 2 = declined),
 
     },

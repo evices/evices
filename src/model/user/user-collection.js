@@ -122,31 +122,6 @@ class User extends Model {
             return Promise.reject();
         }
     }
-    async patch (_id, record){
-        console.log('first , record>>>>>>>>>.', record);
-        console.log('first_id,>>>>>>>>>.',_id);
-        
-
-        try {
-            let result = await this.read({
-                username: record.username,
-            });
-                console.log('second>>>>>>>>>>',result.length);
-                    address.updateOne(
-                        // { username: record.username },
-                        { $addToSet: { address: [{ 
-                            address: req.body.address,
-                            phone: req.body.phone
-                         }] 
-                        }},
-                       
-                      );
-               return result
-        } catch (err) {
-            return err;
-        }
-
-    }
 
 }
 

@@ -32,7 +32,7 @@ function getHandler(req, res, next) {
 }
 
 function getHandlerById(req, res, next) {
-  req.model.read(req.params.id)
+  req.model.read({_id: req.params.id})
     .then(record => {
       res.status(200).json(record);
     }).catch(next);
