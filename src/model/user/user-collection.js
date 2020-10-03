@@ -122,6 +122,7 @@ class User extends Model {
             return Promise.reject();
         }
     }
+
 }
 
 module.exports = new User();

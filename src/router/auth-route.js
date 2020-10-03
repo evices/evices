@@ -29,6 +29,18 @@ router.post('/signin', auth, (req, res, next) => {
         user: req.user
     });
 });
+router.patch('/update/:id', (req, res, next) => {
+    const id = req.params.id;
+    console.log('req.body====>', req.body);
+    try {
+        user.patch(id, req.body).then(result => {
+          
+            res.status(201).json(result);
+        }).catch(next);
+    } catch (e) {
+        res.status(403).send('Error');
+    }
+});
 
 router.get('/google', (req, res) => {
     let URL = 'https://accounts.google.com/o/oauth2/v2/auth';

@@ -15,6 +15,10 @@ const user = mongoose.Schema({
     fullname: {
         type: String
     },
+    address: [ { 
+        address: String,
+        phone: String
+     } ],
     role: {
         type: String,
         default: 'user',
