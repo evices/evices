@@ -5,6 +5,8 @@ const schema = require('./user-schema');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+const MINUTES = 15;
+
 class User extends Model {
     constructor() {
         super(schema);
@@ -82,7 +84,7 @@ class User extends Model {
             }
 
             if (tokenObject.username) {
-                let inDb = await this.findAll(tokenObject.username);
+                let inDb = await this.read({username: tokenObject.username});
                 return inDb ? Promise.resolve(inDb[0]) : Promise.reject();
             } else {
                 return Promise.reject();
