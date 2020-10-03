@@ -52,4 +52,6 @@ $ node index.js
 PORT=3000
 MONGOOSE_URL=mongodb://localhost:27017/401midproject
 SECRET=evices
+CLIENT_ID=82394101385-jaqm9i6p3cdu3i374lgg1b9ao6gfnpe3.apps.googleusercontent.com
+CLIENT_SECRET=IBI9MQ0P5MTBZIyINtEQDDY0
 ```
