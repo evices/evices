@@ -9,7 +9,7 @@ router.param('model', getModel);
 const bearer = require('../middleware/bearer-auth');
 const permissions = require('../middleware/auth-capabilities');
 
-router.post('/:model',  bearer, permissions('create'), postHandler);
+router.post('/:model', postHandler);
 router.get('/:model', getHandler);
 router.get('/:model/:id', getHandlerById);
 router.put('/:model/:id',  bearer, permissions('update'), updateHandler);
