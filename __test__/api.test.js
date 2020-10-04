@@ -54,6 +54,15 @@ describe('SERVER TESTING', () => {
   //   });
 });
 
+
+
+
+
+
+
+
+
+// ==============================
 describe('Posting Services on the app', () => {
   let newUser = {
     username: "Nedal",
@@ -65,24 +74,71 @@ describe('Posting Services on the app', () => {
     password: "1234",
     role: "user"
   }
+  
   let newPost = {
-    "username": "Nedal",
-    "password": "1234",
-    "title": "create your wall",
-    "description": "call me whenever you want",
-    "category": "TECH"
+    username: "Nedal",
+    title: "create your wall",
+    description: "call me whenever you want",
+    category: "TECH"
   }
   it('the user can not post without signup as a seller', () => {
-    return mockRequest.post('/post').send(newPost).then(posting=>{
+    return mockRequest.post('/post').send(newPost).then(posting => {
       expect(posting.status).toBe(500)
-    }).catch(err=>{
+    }).catch(err => {
       console.log(err);
     })
   })
 
-  it('the user can post if he signed in as a seller',()=>{
+  // it('the user can post if he signed as a seller', async () => {
 
-    mockRequest.post('/signup').send(newUser)
-    mockRequest.post('/signin').set('authorization', `Basic ${authHeader}`)
+  //   let authHeader = await base64.encode(`${newUser.username}:${newUser.password}`);
+  //   await mockRequest.post('/signup').send(newUser)
+  //   let sign = await mockRequest.post('/signin').set('authorization', `Basic ${authHeader}`)
+  //   let posting = await mockRequest.post('/post').set('authorization', `Basic ${authHeader}`).send(newPost)
+  //   let record = posting.body;
+
+  //   expect(sign.statusCode).toBe(200)
+  //   expect(posting.status).toBe(201)
+  //   expect(record.username).toEqual(newPost.username)
+  //   expect(record.title).toEqual(newPost.title)
+  //   expect(record.description).toEqual(newPost.description)
+  // })
+
+  it('can load all posts from database, GET',async()=>{
+    let allPosts=await mockRequest.get('/post')
+    expect(allPosts.status).toBe(200)
   })
+
+  it('can load specific posts from database, GET',async()=>{
+    let authHeader = await base64.encode(`${newUser.username}:${newUser.password}`);
+    let sign = await mockRequest.post('/signin').set('authorization', `Basic ${authHeader}`)
+    let posting = await mockRequest.post('/post').set('authorization', `Basic ${authHeader}`).send(newPost)
+    let record = posting.body._id;
+    let allPosts=await mockRequest.get(`/post/${record}`)
+    expect(allPosts.status).toBe(200)
+  })
+
+  it('user can update all data in the post or specific property',async ()=>{
+    let updatePost = {
+      username: "Nedal",
+      title: "fix your fire wall",
+      description: "call me after at 9:00 am",
+      category: "TECH"
+    }
+    let authHeader = await base64.encode(`${newUser.username}:${newUser.password}`);
+    let sign = await mockRequest.post('/signin').set('authorization', `Basic ${authHeader}`)
+    let posting = await mockRequest.post('/post').set('authorization', `Basic ${authHeader}`).send(newPost)
+    let record = posting.body._id;
+    let update=await mockRequest.put(`/post/${record}`).set('authorization',`Bearer ${sign.body.token}`).send(updatePost)
+    expect(update.status).toEqual(201)
+    expect(update.body.title).toEqual(updatePost.title)
+    expect(update.body.description).toEqual(updatePost.description)
+
+    let patch=await mockRequest.put(`/post/${record}`).set('authorization',`Bearer ${sign.body.token}`).send({username: "Jaber"})
+    expect(patch.status).toEqual(201)
+    expect(patch.body.username).toEqual('Jaber')
+
+  })
+  
 })
+// ======================
