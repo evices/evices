@@ -5,6 +5,7 @@ const auth = require('../middleware/authorization');
 const oauth = require('../middleware/oauth');
 
 router.post('/signup', async (req, res, next) => {
+    console.log(req.body)
     try {
         user.save(req.body).then(result => {
             let token = user.generateToken(result);
@@ -12,6 +13,7 @@ router.post('/signup', async (req, res, next) => {
                 result,
                 token
             };
+            console.log('sign',res.body)
             res.status(201).send({
                 token,
                 result

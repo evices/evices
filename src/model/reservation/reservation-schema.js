@@ -5,24 +5,24 @@ const mongoose = require('mongoose');
 const reservation = mongoose.Schema({
     user_id: {
         type: String,
-        require: true
+        required: true
     },
     provider_id: {
         type: String,
-        require: true
+        required: true
     },
     post_id: {
         type: String,
-        require: true
+        required: true
     },
     book_date: {
         type: Date,
-        require: true
+        required: true
     },
     is_approved: {
         type: Number,
         enum: [0, 1, 2],
-        require: true,
+        required: true,
         default: 0
         //(0 = pending, 1 = approved, 2 = declined),
 

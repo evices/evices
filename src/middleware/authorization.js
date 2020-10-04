@@ -19,7 +19,7 @@ const auth = async (req, res, next) => {
     .decode(userNameAndPassword)
     .split(':');
 
-  console.log(username, password);
+  console.log('inside singin',username, password);
 
   try {
     let {
