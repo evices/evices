@@ -15,18 +15,26 @@ describe('SERVER TESTING', ()=> {
   });
   it('respond with 201 if: get the route with ID' , async ()  =>{
     let signupResponse = await mockRequest.post('/signup').send(trueTestObj);
-    console.log('signupResponse>>>>>.',signupResponse);
+    console.log('signupResponse>>>>>.',signupResponse.body);
 
-    return mockRequest.get(`/user/${signupResponse.body[0]._id}`).then(data =>{
+    return mockRequest.get(`/user/${signupResponse.body.result._id}`).then(data =>{
         
       expect(data.status).toBe(200);
     })
   });
-  it('respond with 201 if: post user using the route' ,() =>{
-    return mockRequest.post('/user/:id').then(data =>{
-      expect(data.status).toBe(201);
-    })
+
+  it('respond with 201 if: post user using the route' , async () =>{
+    let obj = {
+      username: 'waleed',
+      password: 'waleed',
+      role: 'admin',
+      fullname: 'Waleed Afifi'
+    }
+    let signupResponse = await mockRequest.post('/signup').send(obj);
+    expect(signupResponse.status).toBe(201);
+
   });
+
 //   it('respond with 201 if: put user into the route' ,() =>{
 //     return mockRequest.put('/user/:id').then(data =>{
 //       expect(data.status).toBe(201);
