@@ -111,11 +111,11 @@ describe('Posting Services on the app', () => {
     password: "1234",
     role: "seller"
   }
-  let newUser2 = {
-    username: "hussain",
-    password: "1234",
-    role: "user"
-  }
+  // let newUser2 = {
+  //   username: "hussain",
+  //   password: "1234",
+  //   role: "user"
+  // }
   
   let newPost = {
     username: "Nedal",
