@@ -56,7 +56,7 @@ class User extends Model {
 
     generateToken(user) {
         // console.log(user);
-        const signed = jwt.sign({
+        const signed =  jwt.sign({
             id: user._id,
             username: user.username,
             role: user.role,
@@ -108,11 +108,11 @@ class User extends Model {
             return null;
         }
 
-        console.log(user);
+        console.log('user',user);
 
         let compare = await this.comparePasswords(user, password);
 
-        console.log(compare);
+        console.log('compare',compare);
 
         if (user && compare) {
             let signed = await this.generateToken(user);
