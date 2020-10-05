@@ -20,7 +20,7 @@ const user = mongoose.Schema({
     fullname: {
         type: String
     },
-    address: [ address ],
+    address: [address],
     role: {
         type: String,
         default: 'user',
@@ -30,6 +30,10 @@ const user = mongoose.Schema({
         type: Array,
         default: [],
         required: true
+    },
+    capcity: {
+        type: Number,
+        default: 5
     }
 })
 

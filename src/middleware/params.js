@@ -15,10 +15,10 @@ module.exports = (req, res, next) => {
       req.model = require(`../model/${model}/${model}-collection`);
       next();
       return;
-    case 'patch':
-        req.model = require(`../model/${model}/${model}-collection`);
-        next();
-        return;
+    // case 'patch':
+    //     req.model = require(`../model/${model}/${model}-collection`);
+    //     next();
+    //     return;
     case 'reservation':
       req.model = require(`../model/${model}/${model}-collection`);
       next();

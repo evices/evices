@@ -3,6 +3,8 @@
 const { Schema } = require('mongoose');
 const Model = require('../model');
 const schema = require('./reservation-schema');
+const user=require('../user/user-schema');
+
 
 class Reservation extends Model {
     constructor() {
@@ -16,10 +18,10 @@ class Reservation extends Model {
             is_approved: 1,
             book_date: record.book_date
         });
+        const capcity=await user.find({_id:record.provider_id});
+        console.log('capacity',capcity);
 
-        console.log(result);
-
-        if (result.length > 0) {
+        if (result.length >= capcity[0].capcity) {
             throw Error('This job already booked and approved');
         } else {
 

@@ -1,7 +1,6 @@
 'use strict';
 
 const express = require('express');
-
 const getModel = require('../middleware/params');
 const router = express.Router();
 router.param('model', getModel);
@@ -9,7 +8,7 @@ router.param('model', getModel);
 const bearer = require('../middleware/bearer-auth');
 const permissions = require('../middleware/auth-capabilities');
 
-router.post('/:model', bearer, permissions('update'), postHandler);
+router.post('/:model',  bearer, permissions('update'), postHandler);
 router.get('/:model', getHandler);
 router.get('/:model/:id', getHandlerById);
 router.put('/:model/:id',  bearer, permissions('update'), updateHandler);
