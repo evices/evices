@@ -35,9 +35,9 @@ module.exports = (req, res, next) => {
     // case '/google':
     //   next();
     //   return;
-    // case '/category':
-    //     next();
-    //     return;
+    case '/category':
+        next();
+        return;
     default:
       next('Invalid Model');
       return;
