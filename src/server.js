@@ -8,6 +8,7 @@ const cors = require('cors');
 
 const router = require('./router/api-v1');
 const auth_router = require('./router/auth-route');
+const extra_route = require('./router/extra-route');
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // requiring the error middleware files
@@ -26,6 +27,7 @@ app.use(morgan('dev'));
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 app.use(auth_router);
+app.use(extra_route);
 app.use(router);
 
 // using the error middleware handlers

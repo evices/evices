@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const user = require('../model/user/user-collection');
+const post = require('../model/post/post-collection');
 const auth = require('../middleware/authorization');
 const oauth = require('../middleware/oauth');
+const { route } = require('./api-v1');
 
 router.post('/signup', async (req, res, next) => {
     console.log(req.body)
@@ -30,18 +32,6 @@ router.post('/signin', auth, (req, res, next) => {
         token: req.token,
         user: req.user
     });
-});
-router.patch('/update/:id', (req, res, next) => {
-    const id = req.params.id;
-    console.log('req.body====>', req.body);
-    try {
-        user.patch(id, req.body).then(result => {
-          
-            res.status(201).json(result);
-        }).catch(next);
-    } catch (e) {
-        res.status(403).send('Error');
-    }
 });
 
 router.get('/google', (req, res) => {

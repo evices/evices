@@ -17,6 +17,8 @@ class Reservation extends Model {
             book_date: record.book_date
         });
 
+        console.log(result);
+
         if (result.length > 0) {
             throw Error('This job already booked and approved');
         } else {

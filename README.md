@@ -40,11 +40,21 @@ The main feature of this website clients can contact the service providers, the 
 - dotenv
 - bcrybt
 - jsonwebtoken
+- jest
+- @code-fellows/supergoose
+- base-64
+- cors
+- superagent
 
 ## run app
 ```
 $ node .
 $ node index.js
+```
+
+## run test
+```
+$ npm run test
 ```
 
 ## .env file
