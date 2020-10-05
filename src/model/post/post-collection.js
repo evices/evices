@@ -15,6 +15,17 @@ class Post extends Model {
         // post[0].comments.push(record);
         return post;
     }
+
+    async readCategory() {
+        let result = await this.schema.distinct('category');
+        return result;
+    }
+
+    async readPost(category = null) {
+        let queryParam = category ? category : {};
+        let result = this.schema.find(queryParam);
+        return result;
+    }
 }
 
 module.exports = new Post();
