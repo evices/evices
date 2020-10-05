@@ -49,22 +49,22 @@ class Reservation extends Model {
         }
     }
 
-    async patch(_id, record) {
-        console.log(_id);
+    // async patch(_id, record) {
+    //     console.log(_id);
 
-        let postResult = await this.read({ _id });
+    //     let postResult = await this.read({ _id });
         
-        console.log(postResult);
+    //     console.log(postResult);
 
-        if(postResult[0].provider_id === record.current_user_id || postResult[0].user_id === record.current_user_id) {
-            let newRecord = this.schema.findByIdAndUpdate(_id, record, {
-                new: true,
-            });
-            return newRecord;
-        } else {
-            return {"message": "No permissions"};
-        }
-    }
+    //     if(postResult[0].provider_id === record.current_user_id || postResult[0].user_id === record.current_user_id) {
+    //         let newRecord = this.schema.findByIdAndUpdate(_id, record, {
+    //             new: true,
+    //         });
+    //         return newRecord;
+    //     } else {
+    //         return {"message": "No permissions"};
+    //     }
+    // }
 
 }
 

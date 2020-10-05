@@ -17,7 +17,7 @@ router.delete('/:model/:id', bearer, permissions('delete'), deleteHandler);
 
 
 function postHandler(req, res, next) {
-  req.body.current_user_id = req.user.id;
+  // req.body.current_user_id = req.user.id;
   req.model.create(req.body)
     .then(record => {
       res.status(201).json(record);
@@ -51,7 +51,7 @@ function updateHandler(req, res, next) {
 }
 
 function patchHandler(req, res, next) {
-  req.body.current_user_id = req.user.id;
+  // req.body.current_user_id = req.user.id;
   req.model.patch(req.params.id, req.body)
     .then(record => {
       res.status(201).json(record);
