@@ -1,7 +1,5 @@
 'use strict';
-const {
-  server
-} = require('../src/server');
+const {server} = require('../src/server');
 const userTest = require('../src/model/user/user-collection');
 const supergoose = require('@code-fellows/supergoose');
 const mockRequest = supergoose(server);
@@ -132,7 +130,7 @@ describe('Posting Services on the app', () => {
     description: "call me whenever you want",
     category: "TECH"
   }
-  it('the user can not post without signup as a seller',async () => {
+  it('the user can not post without signup as a seller', async () => {
     let posting = await mockRequest.post('/post').send(newPost)
     expect(posting.status).toBe(500)
 
@@ -184,10 +182,10 @@ describe('Posting Services on the app', () => {
     expect(patch.body.username).toEqual('Jaber')
 
   })
-  it('user can delete the post if he has the permission as a seller',async()=>{
+  it('user can delete the post if he has the permission as a seller', async () => {
     let posting = await mockRequest.post('/post').set('authorization', `Bearer ${sign.body.token}`).send(newPost)
     let record = posting.body._id;
-    console.log('>>>>>>>>>>>>>>>',record);
+    console.log('>>>>>>>>>>>>>>>', record);
     let deleteMethod = await mockRequest.delete(`/post/${record}`).set('authorization', `Bearer ${sign.body.token}`)
     expect(deleteMethod.status).toEqual(200)
 
