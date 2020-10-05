@@ -8,15 +8,16 @@ router.param('model', getModel);
 const bearer = require('../middleware/bearer-auth');
 const permissions = require('../middleware/auth-capabilities');
 
-router.post('/:model',  bearer, permissions('update'), postHandler);
+router.post('/:model', bearer, permissions('update'), postHandler);
 router.get('/:model', getHandler);
 router.get('/:model/:id', getHandlerById);
-router.put('/:model/:id',  bearer, permissions('update'), updateHandler);
-router.patch('/:model/:id',  bearer, permissions('update'), patchHandler);
+router.put('/:model/:id', bearer, permissions('update'), updateHandler);
+router.patch('/:model/:id', bearer, permissions('update'), patchHandler);
 router.delete('/:model/:id', bearer, permissions('delete'), deleteHandler);
 
 
 function postHandler(req, res, next) {
+  req.body.current_user_id = req.user.id;
   req.model.create(req.body)
     .then(record => {
       res.status(201).json(record);
@@ -34,7 +35,9 @@ function getHandler(req, res, next) {
 }
 
 function getHandlerById(req, res, next) {
-  req.model.read({_id: req.params.id})
+  req.model.read({
+      _id: req.params.id
+    })
     .then(record => {
       res.status(200).json(record);
     }).catch(next);
@@ -48,10 +51,11 @@ function updateHandler(req, res, next) {
 }
 
 function patchHandler(req, res, next) {
-    req.model.patch(req.params.id, req.body)
-      .then(record => {
-        res.status(201).json(record);
-      }).catch(next);
+  req.body.current_user_id = req.user.id;
+  req.model.patch(req.params.id, req.body)
+    .then(record => {
+      res.status(201).json(record);
+    }).catch(next);
 }
 
 function deleteHandler(req, res, next) {

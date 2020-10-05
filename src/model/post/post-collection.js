@@ -8,22 +8,22 @@ class Post extends Model {
         super(schema);
     }
 
-    pushToArray(id, record) {
-        let post = this.read({_id: id});
-        console.log(post);
+    // pushToArray(id, record) {
+    //     let post = this.read({_id: id});
+    //     console.log(post);
 
-        // post[0].comments.push(record);
-        return post;
-    }
+    //     // post[0].comments.push(record);
+    //     return post;
+    // }
 
     async readCategory() {
         let result = await this.schema.distinct('category');
         return result;
     }
 
-    async readPost(category = null) {
+    async readPost(category = null, lmt = null) {
         let queryParam = category ? category : {};
-        let result = this.schema.find(queryParam);
+        let result = this.schema.find(queryParam).limit(lmt);
         return result;
     }
 }

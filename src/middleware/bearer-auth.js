@@ -13,6 +13,7 @@ module.exports = async (req, res, next) => {
         const users = await User.authenticateToken(token);
         console.log(users);
         req.user = {
+          id: users.id,
           username: users.username,
           role: users.role,
           capabilities: users.capabilities,
