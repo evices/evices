@@ -1,4 +1,4 @@
-const { server } = require('../src/server');
+const {server} = require('../src/server');
 
 const supergoose = require('@code-fellows/supergoose');
 const mockRequest = supergoose(server);
