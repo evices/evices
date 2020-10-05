@@ -2,7 +2,7 @@
 'use strict';
 
 const Model = require('../model');
-const schema = require('./messaage-collection');
+const schema = require('./message-schema');
 
 class Messaage extends Model {
     constructor() {
