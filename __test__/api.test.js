@@ -114,7 +114,7 @@ describe('Posting Services on the app', () => {
     newUser = {
       username: "Nedal",
       password: "1234",
-      role: "seller"
+      role: "admin"
     }
     let authHeader = await base64.encode(`${newUser.username}:${newUser.password}`);
     await mockRequest.post('/signup').send(newUser)
@@ -136,11 +136,6 @@ describe('Posting Services on the app', () => {
     let posting = await mockRequest.post('/post').send(newPost)
     expect(posting.status).toBe(500)
 
-    // return mockRequest.post('/post').send(newPost).then(posting => {
-    //   expect(posting.status).toBe(500)
-    // }).catch(err => {
-    //   console.log(err);
-    // })
   })
 
   it('the user can post if he signed as a seller', async () => {
@@ -192,8 +187,9 @@ describe('Posting Services on the app', () => {
   it('user can delete the post if he has the permission as a seller',async()=>{
     let posting = await mockRequest.post('/post').set('authorization', `Bearer ${sign.body.token}`).send(newPost)
     let record = posting.body._id;
+    console.log('>>>>>>>>>>>>>>>',record);
     let deleteMethod = await mockRequest.delete(`/post/${record}`).set('authorization', `Bearer ${sign.body.token}`)
-    expect(deleteMethod.status).toEqual(201)
+    expect(deleteMethod.status).toEqual(200)
 
   })
 
