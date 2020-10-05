@@ -23,18 +23,18 @@ module.exports = (req, res, next) => {
       req.model = require(`../model/${model}/${model}-collection`);
       next();
       return;
-    case 'signin':
-      next();
-      return;
-    case 'signup':
-      next();
-      return;
-    case 'oauth':
-      next();
-      return;
-    case '/google':
-      next();
-      return;
+    // case 'signin':
+    //   next();
+    //   return;
+    // case 'signup':
+    //   next();
+    //   return;
+    // case 'oauth':
+    //   next();
+    //   return;
+    // case '/google':
+    //   next();
+    //   return;
     case '/category':
         next();
         return;
