@@ -35,6 +35,7 @@ router.post('/signin', auth, (req, res, next) => {
 });
 
 router.get('/google', (req, res) => {
+    post.getRateAVG({_id : "5f7c299d16dee4a8503f9d4c"});
     let URL = 'https://accounts.google.com/o/oauth2/v2/auth';
 
     let options = {

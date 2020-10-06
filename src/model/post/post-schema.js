@@ -5,8 +5,15 @@ const mongoose = require('mongoose');
 const comments = mongoose.Schema({
     username: String,
     comments: String,
-    created_date: { type: Date, default: Date.now() }
- });
+    rate: {
+        type: Number,
+        default: 0
+    },
+    created_date: {
+        type: Date,
+        default: Date.now()
+    }
+});
 
 const post = mongoose.Schema({
     username: {
@@ -27,6 +34,7 @@ const post = mongoose.Schema({
         enum: ['TECH', 'CARPENTER']
     },
     comments: [comments],
+    rateAVG: Number,
 });
 
 

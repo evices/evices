@@ -1,5 +1,7 @@
 'use strict';
-const {server} = require('../src/server');
+const {
+  server
+} = require('../src/server');
 const userTest = require('../src/model/user/user-collection');
 const supergoose = require('@code-fellows/supergoose');
 const mockRequest = supergoose(server);
@@ -84,7 +86,7 @@ describe('SERVER TESTING', () => {
       .set('authorization', `Basic ${realBadAuthHeader}`);
 
     expect(signinResponse.statusCode).toBe(500);
-    expect(signinResponse.body).toEqual({});
+    expect(signinResponse.body.general_msg).toEqual("Something went wrong O_O");
 
     let wrongPasswordHeader = base64.encode(
       `${trueTestObj.username}:wrong-password1234-again-555`,
@@ -94,12 +96,31 @@ describe('SERVER TESTING', () => {
       .post('/signin')
       .set('authorization', `Basic ${wrongPasswordHeader}`);
     expect(signinResponse2.statusCode).toBe(500);
-    expect(signinResponse2.body).toEqual({});
+    expect(signinResponse2.body.general_msg).toEqual("Something went wrong O_O");
   });
 
 });
 
 
+describe('Message', () => {
+  it('can geet messages', async () => {
+    let allPosts = await mockRequest.get('/message')
+    expect(allPosts.status).toBe(200)
+
+  });
+
+  it('can geet category', async () => {
+    let allPosts = await mockRequest.get('/category')
+    expect(allPosts.status).toBe(200)
+
+  });
+
+  it('invalid model', async () => {
+    let allPosts = await mockRequest.get('/mes')
+    expect(allPosts.status).toBe(500)
+
+  });
+});
 
 
 
@@ -166,7 +187,12 @@ describe('Posting Services on the app', () => {
       username: "Nedal",
       title: "fix your fire wall",
       description: "call me after at 9:00 am",
-      category: "TECH"
+      category: "TECH",
+      comments: [{
+        username: "Waleed",
+        comments: "Waleed",
+        rate: 3,
+      }]
     }
     let posting = await mockRequest.post('/post').set('authorization', `Bearer ${sign.body.token}`).send(newPost)
     let record = posting.body._id;

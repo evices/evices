@@ -17,16 +17,16 @@ module.exports = async function (req, res, next) {
     console.log('(1) CODE:', code);
 
     const remoteToken = await exchangeCodeForToken(code);
-    console.log('(2) ACCESS TOKEN:', remoteToken);
+    // console.log('(2) ACCESS TOKEN:', remoteToken);
 
     const remoteUser = await getRemoteUserInfo(remoteToken);
-    console.log('(3) GOOGLE USER', remoteUser);
+    // console.log('(3) GOOGLE USER', remoteUser);
 
     const [user, token] = await getUser(remoteUser);
     req.token = token;
     req.user = user;
 
-    console.log('(4) LOCAL USER', user);
+    // console.log('(4) LOCAL USER', user);
     next();
   } catch (e) {
     next(`ERROR: ${e.message}`);
@@ -54,6 +54,8 @@ async function exchangeCodeForToken(code) {
 
 // this will use the user api endpoint to get user info/repo info
 async function getRemoteUserInfo(token) {
+  console.log("Code >>>", code);
+
   // this will use the access token to get user details
   const userResponse = await superagent.get(`https://oauth2.googleapis.com/tokeninfo?access_token=${token}`)
     .set('user-agent', 'express-app')
