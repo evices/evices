@@ -4,11 +4,9 @@ const supergoose = require('@code-fellows/supergoose');
 const mockRequest = supergoose(server);
 
 describe('500.js TESTING', () => {
-  it('respond with 500 for bad routs', () => {
-    return mockRequest.get('/foo').then(data => {
-      expect(data.status).toBe(500);
-    }).catch(err => {
-      console.log(err);
-    });
+  it('should respond with 500 for bad routes', async ()=>{
+    const data = await mockRequest.get('/bad-request');
+    // console.log('data:', data);
+    expect(data.statusCode).toBe(500);
   });
 });

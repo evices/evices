@@ -42,5 +42,10 @@ describe('check extra routes to get categories from post schema', () => {
     it('can get a specific category',async()=>{
         let getCategory = await mockRequest.get('/category/TECH')
         expect(getCategory.status).toBe(200)
-    })
+    });
+
+    it('can get a specific category',async()=>{
+        let getCategory = await mockRequest.get('/google')
+        expect(getCategory.status).toBe(200)
+    });
 })

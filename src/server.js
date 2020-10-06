@@ -31,8 +31,8 @@ app.use(extra_route);
 app.use(router);
 
 // using the error middleware handlers
-app.get('*', notFoundhandler);
-app.get(internalServerError);
+app.use('*', notFoundhandler);
+app.use(internalServerError);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // exporting the server and the listen to the index.js to start the server

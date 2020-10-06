@@ -38,6 +38,9 @@ module.exports = (req, res, next) => {
     case '/category':
         next();
         return;
+    case '/bad-request':
+      next();
+      return;
     default:
       next('Invalid Model');
       return;

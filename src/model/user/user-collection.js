@@ -91,7 +91,7 @@ class User extends Model {
             }
 
         } catch (e) {
-            console.log(e);
+            // console.log(e);
             return Promise.reject();
         }
     }
