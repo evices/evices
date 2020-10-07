@@ -22,6 +22,7 @@ router.post('/signup', async (req, res, next) => {
             });
         });
     } catch (e) {
+        /* istanbul ignore next */ 
         res.status(403).send('Error creating user');
     }
 });
@@ -57,6 +58,7 @@ router.get('/google', (req, res) => {
 });
 
 router.get('/oauth', oauth, async (req, res) => {
+    /* istanbul ignore next */ 
     res.status(200).json({
         token: req.token,
         user: req.user

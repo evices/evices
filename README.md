@@ -32,6 +32,10 @@ The main feature of this website clients can contact the service providers, the 
 8. [About us](./wireframe/about-us.png)
 9. Privacy and policy
 
+## HTML pages
+![](https://i.pinimg.com/originals/5c/5d/66/5c5d6684644136c4b1442f1db30af6bf.gif)
+![](https://wiki.smu.edu.sg/is480/img_auth.php/5/58/IS480_Littleteam_Progress_bar.gif)
+
 ## npm Package
 - express
 - morgan
@@ -45,17 +49,29 @@ The main feature of this website clients can contact the service providers, the 
 - base-64
 - cors
 - superagent
+- fs
 
 ## run app
 ```
+// Using node
 $ node .
 $ node index.js
+
+// Or using nodemon
+$ nodemon .
 ```
+
+## Chat test
+After running th server you can go to the `http://localhost:3001` it will show a simple `HTML` page has an input to enter the username then click `join`, you can chat with others, to chat with specific user click on any username it will show another form to chat with that user.
 
 ## run test
 ```
 $ npm run test
 ```
+
+We covered more that 90% in the test from 31 test case
+
+![test](./assets/img/test.png)
 
 ## .env file
 ```
@@ -65,3 +81,9 @@ SECRET=evices
 CLIENT_ID=82394101385-jaqm9i6p3cdu3i374lgg1b9ao6gfnpe3.apps.googleusercontent.com
 CLIENT_SECRET=IBI9MQ0P5MTBZIyINtEQDDY0
 ```
+
+## API Documentation
+[Gitbook link](https://app.gitbook.com/@evices/s/evices-1/start)
+
+## Process UML
+![](./assets/img/uml.png)

@@ -1,0 +1,145 @@
+<html>
+
+<head>
+  <title>my chat app</title>
+  <div id="login">
+    <form id="chat_msg">
+      <label>Enter Username:</label>
+      <input type="text" id="username" />
+      <input type="button" id="join" value="Create Username" />
+    </form>
+  </div>
+  <div>
+    <div id="online_users">
+      <li>List of online users:</li>
+    </div>
+  </div>
+  <!---public room chat begins here----->
+  <div id="chat" style="display: none;">
+    <ul id="messages"></ul>
+    <form action="">
+      <input id="msg" autocomplete="off" />
+      <button id="send">Send</button>
+    </form>
+  </div>
+  <!---private chat begins here----->
+  <div id="private_chat" style="display: none;">
+    <p id="private_user">Private chat with: </p>
+    <div id="private_msg"></div>
+    <form>
+      <input id="p_msg" autocomplete="off" />
+      <button id="p_send">Send private msg</button>
+    </form>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+  <script>
+    var username = null;
+    var socket = io();
+    $('#chat').hide();
+    $('#username').focus();
+    $('form').submit(function (e) {
+      e.preventDefault();
+    });
+
+
+    $('#join').click(function () {
+      username = $('#username').val();
+      console.log('entered username ' + username);
+      if (username != '') {
+        socket.emit('new_user', username);
+        $('#login').detach();
+        $('#chat').show();
+        $('#msg').focus();
+      }
+    });
+
+    $('#send').click(function () {
+      socket.emit('send_msg', $('#msg').val());
+      $('#msg').val('');
+
+    });
+
+
+    socket.on('chat message', function (msg) {
+      // $('#messages').append('<b>'+ username + ':</b> ' + msg + '<br>');
+      $('#messages').append($('<li>').text(msg));
+    });
+
+    socket.on('update_personal', function (status) {
+      $('#messages').append($('<li>').text(status));
+    });
+
+    socket.on('update_users', function (names) {
+      console.log(names);
+
+
+      if (true) {
+
+        $("#online_users").empty();
+        $.each(names, function (clientid, name) {
+          $('#online_users').append("<li><a href='#' id='" + name + "' name='" + name + "' class='private'> " +
+            name + "</a></li>");
+
+        });
+
+
+        $('a.private').click(function () {
+          $('#private_chat').hide();
+
+          $('#private_chat').show();
+          var sender = username;
+
+
+          var recipient = $(this).attr('name');
+
+
+          console.log('name gotten is:' + recipient);
+          $('p#private_user').html('private chat with :' + recipient);
+
+          $('#p_send').click(function () {
+            msg = $('#p_msg').val();
+            if (msg != '') {
+              recipient = recipient;
+              socket.emit('private_msg', msg, recipient,
+              sender); // msg from sender, username of the sender, username of recipient
+              $('#p_msg').val('');
+            } else {
+              $('#p_msg').val('please enter a valid msg');
+
+            }
+          });
+        });
+
+
+      }
+    });
+    socket.on('received_p_msg', function (msg, sender, recipient) {
+      $('#private_chat').show();
+
+      console.log('received privatemsg: ' + msg);
+      $('#private_user').html('privat chat with : ' + sender);
+      $('#private_msg').append($('<div>').html(msg + '</div>'));
+
+      //to continue chat after receiving initial private msg
+      $('#p_send').click(function () {
+        msg = $('#p_msg').val();
+        if (msg != '') {
+          socket.emit('private_msg', msg, sender,
+          recipient); // msg from sender, username of the sender, username of recipient
+          $('#p_msg').val('');
+        } else {
+          $('#p_msg').val('please enter a valid msg');
+        }
+
+        $('#p_msg').val('');
+
+      });
+
+    });
+
+    socket.on("disconnect", function () {
+      $("#msgs").append("The server is not available");
+
+    });
+  </script>
