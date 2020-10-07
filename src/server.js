@@ -36,6 +36,7 @@ app.use(internalServerError);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // exporting the server and the listen to the index.js to start the server
+/* istanbul ignore next */ 
 module.exports = {
     server: app,
     start: (port) => {
