@@ -33,8 +33,11 @@ The main feature of this website clients can contact the service providers, the 
 9. Privacy and policy
 
 ## HTML pages
-![](https://i.pinimg.com/originals/5c/5d/66/5c5d6684644136c4b1442f1db30af6bf.gif)
-![](https://wiki.smu.edu.sg/is480/img_auth.php/5/58/IS480_Littleteam_Progress_bar.gif)
+1. [Home](https://mr-code.com/evices/index.html)
+2. [Single service page](https://mr-code.com/evices/service-provider-single.html)
+3. [Signup page](https://mr-code.com/evices/register.html)
+4. [Contact us](https://mr-code.com/evices/contact.html) 
+5. [About us](https://mr-code.com/evices/aboutus.html)
 
 ## npm Package
 - express
