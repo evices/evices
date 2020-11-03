@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest --verbose --coverage",
     "lint": "eslint '**/*.js'",
-    "fix": "eslint './**/*.js' --ignore-pattern node_modules/ --fix"
+    "fix": "eslint './**/*.js' --ignore-pattern node_modules/ --fix",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
