@@ -5,7 +5,7 @@ const schema = require('./user-schema');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const MINUTES = 15;
+const MINUTES = 1500;
 
 class User extends Model {
     constructor() {
