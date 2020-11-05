@@ -20,6 +20,10 @@ const post = mongoose.Schema({
         type: String,
         required: true,
     },
+    porviderId: {
+        type: String,
+        required: true,
+    },
     title: {
         type: String,
         required: true,
