@@ -27,11 +27,26 @@ const reservation = mongoose.Schema({
         //(0 = pending, 1 = approved, 2 = declined),
 
     },
+    post: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'post'
+    },
+    client: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user'
+    },
+    provider: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user'
+    },
+    address: {
+        place: String,
+        phone: String
+    },
     created_date: {
         type: Date,
         default: Date.now()
     }
 });
-
 
 module.exports = mongoose.model('reservation', reservation);
