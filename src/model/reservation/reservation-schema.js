@@ -40,7 +40,7 @@ const reservation = mongoose.Schema({
         ref: 'user'
     },
     address: {
-        place: String,
+        address: String,
         phone: String
     },
     created_date: {
