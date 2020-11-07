@@ -17,7 +17,11 @@ class Model {
      */
   read(_id) {
     let queryParam = _id ? _id : {};
-    return this.schema.find(queryParam);
+    return this.schema.find(queryParam)
+                      .populate('postedBy', 'username _id fullname')
+                      .populate('client', 'username fullname _id address')
+                      .populate('provider', 'username fullname _id')
+                      .populate('post', '_id title');
   }
 
   /**

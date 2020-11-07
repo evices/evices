@@ -37,6 +37,10 @@ const post = mongoose.Schema({
         required: true,
         enum: ['TECH', 'CARPENTER']
     },
+    postedBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user'
+    },
     comments: [comments],
     rateAVG: Number,
 });
