@@ -43,6 +43,10 @@ const post = mongoose.Schema({
     },
     comments: [comments],
     rateAVG: Number,
+    created_at: {
+        type: Date,
+        default: Date.now()
+    }
 });
 
 
