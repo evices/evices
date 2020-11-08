@@ -37,6 +37,9 @@ const user = mongoose.Schema({
     capcity: {
         type: Number,
         default: 5
+    },
+    user_Image: {
+        type: String
     }
 })
 
