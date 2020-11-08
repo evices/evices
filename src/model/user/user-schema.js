@@ -38,7 +38,7 @@ const user = mongoose.Schema({
         type: Number,
         default: 5
     },
-    user_Image: {
+    user_image: {
         type: String
     }
 })
