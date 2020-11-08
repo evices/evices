@@ -1,6 +1,19 @@
 const express = require('express');
 const router = express.Router();
 const post = require('../model/post/post-collection');
+const multer = require('multer');
+
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'public/uploads/images')
+    },
+    filename: function (req, file, cb) {
+      cb(null, Date.now() + file.originalname); //Appending extension
+    }
+  })
+  
+  var upload = multer({ storage: storage });
+  
 const {
     route
 } = require('./api-v1')
@@ -92,6 +105,15 @@ router.get('/category/:category', async (req, res, next) => {
     });
     res.status(200).json(result);
 });
+
+router.post('/upload', upload.single('photo'), (req, res) => {
+    console.log(req)
+    if(req.file) {
+        res.json(req.file);
+    }
+    else throw 'error';
+});
+
 
 router.get('/bad-request', (req, res, next) => {
     res.status(500).json();
