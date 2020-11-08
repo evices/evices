@@ -35,7 +35,7 @@ const post = mongoose.Schema({
     category: {
         type: String,
         required: true,
-        enum: ['خدمات النجارة', 'خدمات السباكة', 'خدمات السيارات', 'خدمات النظافة', 'حدمات الحدادة']
+        enum: ['خدمات النجارة', 'خدمات السباكة', 'خدمات السيارات', 'خدمات النظافة', 'oدمات الحدادة']
     },
     postedBy: {
         type: mongoose.Schema.Types.ObjectId,
