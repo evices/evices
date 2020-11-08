@@ -44,6 +44,9 @@ module.exports = (req, res, next) => {
     case '/socket.io':
       next();
       return;
+    case '/public':
+      next();
+      return;
     default:
       next('Invalid Model');
       return;

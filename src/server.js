@@ -5,6 +5,7 @@ require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
+const path = require('path');
 
 const router = require('./router/api-v1');
 const auth_router = require('./router/auth-route');
@@ -18,6 +19,8 @@ const internalServerError = require('./error_Middleware/500');
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // puts new Express application inside the app variable (to start a new Express application)
 const app = express();
+app.use("/public", express.static('public'));
+
 // express. json() is a inbuilt method in express to recognize the incoming Request Object as a JSON Object
 app.use(express.json());
 //

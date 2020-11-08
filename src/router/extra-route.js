@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const post = require('../model/post/post-collection');
 const multer = require('multer');
+const path = require('path');
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -17,6 +18,7 @@ var storage = multer.diskStorage({
 const {
     route
 } = require('./api-v1')
+
 
 /* istanbul ignore next */ 
 var fs = require('fs'),
@@ -113,6 +115,10 @@ router.post('/upload', upload.single('photo'), (req, res) => {
     }
     else throw 'error';
 });
+
+router.get('/public/uploads/images/*', (req, res) => {
+    return res.json();
+})
 
 
 router.get('/bad-request', (req, res, next) => {
