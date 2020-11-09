@@ -21,7 +21,9 @@ class Model {
                       .populate('postedBy', 'username _id fullname phone')
                       .populate('client', 'username fullname _id address')
                       .populate('provider', 'username fullname _id')
-                      .populate('post', '_id title');
+                      .populate('post', '_id title')
+                      .populate('receiver_id', '_id fullname username')
+                      .populate('sender_id', '_id fullname username');
   }
 
   /**
