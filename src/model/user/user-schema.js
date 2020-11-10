@@ -40,6 +40,9 @@ const user = mongoose.Schema({
     },
     user_image: {
         type: String
+    },
+    email: {
+        type: String
     }
 })
 

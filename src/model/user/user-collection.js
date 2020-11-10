@@ -29,7 +29,7 @@ class User extends Model {
                 console.log('new record:', newRecord);
 
                 const roleMap = {
-                    user: 1,
+                    user: 3,
                     seller: 3,
                     admin: 4,
                 };
